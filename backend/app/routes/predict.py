@@ -5,4 +5,4 @@ router = APIRouter()
 
 @router.post("/predict")
 def predict():
-    return {"msg": "This is the predict endpoint!"})
+    return {"msg": "This is the predict endpoint!"}
