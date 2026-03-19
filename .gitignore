@@ -1,0 +1,9 @@
+venv/
+models/
+node_modules/
+__pycache__/
+*.pt
+*.pth
+*.bin
+*.safetensors
+*.log
