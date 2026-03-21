@@ -2,6 +2,7 @@ fastapi
 uvicorn
 transformers
 torch
+sqlalchemy
 scikit-learn
 pydantic
 pandas
