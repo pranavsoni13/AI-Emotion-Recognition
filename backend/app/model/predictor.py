@@ -4,7 +4,8 @@ classifier = None
 def get_model():
     global classifier
     if classifier is None:
-        from transformers import pipeline
+        import transformers
+        pipeline=transformers.pipeline
         print("Loading model...")
         classifier = pipeline("text-classification", model="bhadresh-savani/distilbert-base-uncased-emotion", top_k=None)
         print("Model loaded.")
