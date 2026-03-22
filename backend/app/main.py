@@ -32,3 +32,7 @@ Base.metadata.create_all(bind=engine)
 
 app.include_router(predict_router, tags=["Predict"])
 app.include_router(analytics_router, prefix="/analytics", tags=["Analytics"])
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("app.main:app", host="0.0.0.0",port=int(os.environ.get("PORT", 10000))) 

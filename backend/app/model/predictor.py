@@ -1,7 +1,7 @@
 from transformers import pipeline
 classifier = None
 
-def predict_emotion(text: str):
+def get_model(text: str):
     global classifier
     if classifier is None:
         print("Loading model...")
