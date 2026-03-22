@@ -6,7 +6,7 @@ def get_model():
     if classifier is None:
         from transformers import pipeline
         print("Loading model...")
-        classifier = pipeline("text-classification", model="j-hartmann/emotion-english-distilroberta-base", top_k=None)
+        classifier = pipeline("text-classification", model="bhadresh-savani/distilbert-base-uncased-emotion", top_k=None)
         print("Model loaded.")
     return classifier
 
