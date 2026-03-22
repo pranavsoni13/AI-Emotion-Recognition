@@ -30,7 +30,7 @@ function EmotionInput({setEmotionData}) {
     console.log("Analyze clicked");
 
     try {
-      const res = await API.post("/predict", { text: inputText});
+      const res = await API.post("/predict", { text});
       const data = res.data;
       console.log("API response:",data);
       setResult(data);
