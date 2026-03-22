@@ -30,5 +30,5 @@ def health():
 
 Base.metadata.create_all(bind=engine)
 
-app.include_router(predict_router, prefix="/predict", tags=["Predict"])
+app.include_router(predict_router, tags=["Predict"])
 app.include_router(analytics_router, prefix="/analytics", tags=["Analytics"])
