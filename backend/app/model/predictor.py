@@ -15,3 +15,8 @@ def predict_emotion(text: str):
     except Exception as e:
         print(f"Error in prediction: {e}")
         return {"error": str(e)}
+
+print("🚀 API HIT")
+
+if classifier is None:
+    print("🔥 Loading model...")
