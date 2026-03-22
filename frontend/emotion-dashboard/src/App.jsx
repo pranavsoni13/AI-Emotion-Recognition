@@ -7,7 +7,7 @@ function App() {
   const [analytics,setAnalytics]=useState(null);
 
   useEffect(()=>{
- fetch("https://emotion-backend-skns.onrender.com/analytics")
+ fetch("https://emotion-backend-skns.onrender.com")
   .then(res=>res.json())
   .then(data=>setAnalytics(data));
   },[]);
