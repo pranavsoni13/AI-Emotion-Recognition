@@ -10,7 +10,7 @@ def get_model(text: str):
         print("Model loaded.")
     return classifier
 
-def predict_emotions(text: str):
+def predict_emotion(text: str):
     try:
         model=get_model()
         result = model(text)[0]
