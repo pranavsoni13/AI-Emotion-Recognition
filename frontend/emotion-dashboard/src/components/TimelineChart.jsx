@@ -30,7 +30,7 @@ export default function TimelineChart() {
 
   const fetchTimeline = async () => {
     try {
-      const res = await API.get("/emotion-timeline");
+      const res = await API.get("/analytics/emotion-timeline");
       setTimeline(res.data.timeline);
     } catch (error) {
       console.error(error);
