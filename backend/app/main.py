@@ -28,7 +28,7 @@ def root():
 def health():
     return {"Status": "Healthy"}
 
-@app.gey("/")
+@app.get("/")
 def home():
     return {"message": "Welcome to the AI Emotion Recognition API!"}
 
