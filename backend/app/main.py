@@ -28,6 +28,10 @@ def root():
 def health():
     return {"Status": "Healthy"}
 
+@app.gey("/")
+def home():
+    return {"message": "Welcome to the AI Emotion Recognition API!"}
+
 Base.metadata.create_all(bind=engine)
 
 app.include_router(predict_router, tags=["Predict"])
