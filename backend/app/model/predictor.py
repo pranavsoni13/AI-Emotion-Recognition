@@ -1,7 +1,7 @@
 
 classifier = None
 
-def get_model(text: str):
+def get_model():
     global classifier
     if classifier is None:
         from transformers import pipeline
