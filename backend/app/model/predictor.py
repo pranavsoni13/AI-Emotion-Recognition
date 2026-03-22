@@ -1,9 +1,10 @@
-from transformers import pipeline
+
 classifier = None
 
 def get_model(text: str):
     global classifier
     if classifier is None:
+        from transformers import pipeline
         print("Loading model...")
         classifier = pipeline("text-classification", model="j-hartmann/emotion-english-distilroberta-base", top_k=None)
         print("Model loaded.")
