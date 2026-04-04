@@ -1,8 +1,20 @@
-import axios from "axios";
+const API_URL = "https://ai-emotion-recognition-production.up.railway.app";
 
-const API = axios.create({
-  baseURL: "https://emotion-backend-skns.onrender.com",
-  timeout: 800000
-});
+export const predictEmotion = async (text) => {
+  try {
+    const response = await fetch(`${API_URL}/predict`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ text }),
+    });
 
-export default API;
+    const data = await response.json();
+    return data;
+
+  } catch (error) {
+    console.error("API error:", error);
+    return { error: "Failed to fetch" };
+  }
+};
