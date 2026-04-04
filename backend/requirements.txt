@@ -1,7 +1,6 @@
 fastapi
 uvicorn
 transformers==4.36.2
-torch==2.10.1+cpu --extra-index-url https://download.pytorch.org/whl/cpu
 sqlalchemy
 scikit-learn
 pydantic
