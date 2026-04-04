@@ -1,22 +1,26 @@
+import requests
 
-classifier = None
+API_URL = "https://api-inference.huggingface.co/models/j-hartmann/emotion-english-distilroberta-base"
 
-def get_model():
-    global classifier
-    if classifier is None:
-        import transformers
-        pipeline=transformers.pipeline
-        print("Loading model...")
-        classifier = pipeline("text-classification", model="bhadresh-savani/distilbert-base-uncased-emotion", top_k=None)
-        print("Model loaded.")
-    return classifier
+headers = {
+    "Authorization": "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"
+}
 
 def predict_emotion(text: str):
     try:
-        model=get_model()
-        result = model(text)[0]
-        emotions={item["label"]:round(item["score"], 3) for item in result}
+        response = requests.post(
+            API_URL,
+            headers=headers,
+            json={"inputs": text}
+        )
+        result = response.json()[0]
+
+        emotions = {
+            item["label"]: round(item["score"], 3)
+            for item in result
+        }
+
         return emotions
+
     except Exception as e:
-        print(f"Error in prediction: {e}")
         return {"error": str(e)}
