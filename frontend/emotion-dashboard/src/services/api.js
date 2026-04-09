@@ -1,21 +1,37 @@
-const API_URL=import.meta.env.VITE_API_URL;
-const BASE_URL=API_URL || "https://ai-emotion-recognition-production.up.railway.app";
+const API_URL = import.meta.env.VITE_API_URL;
 
-export const API = async (text) => {
-  try {
-    const response = await fetch(`${BASE_URL}/predict`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ text }),
-    });
+const BASE_URL =
+  API_URL || "https://ai-emotion-recognition-production.up.railway.app";
 
-    const data = await response.json();
-    return data;
+const API = {
+  // prediction
+  predict: async (text) => {
+    try {
+      const response = await fetch(`${BASE_URL}/predict`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ text }),
+      });
 
-  } catch (error) {
-    console.error("API error:", error);
-    return { error: "Failed to fetch" };
-  }
+      return await response.json();
+    } catch (error) {
+      console.error("API error:", error);
+      return { error: "Failed to fetch" };
+    }
+  },
+
+  // timeline
+  timeline: async () => {
+    try {
+      const response = await fetch(`${BASE_URL}/analytics/emotion-timeline`);
+      return await response.json();
+    } catch (error) {
+      console.error("Timeline error:", error);
+      return { timeline: [] };
+    }
+  },
 };
+
+export default API;

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import API from "services/api";
+import API from "../services/api";
+
 import {
   Chart as ChartJS,
   LineElement,
@@ -9,6 +10,7 @@ import {
   Tooltip,
   Legend
 } from "chart.js";
+
 import { Line } from "react-chartjs-2";
 
 ChartJS.register(
@@ -21,7 +23,6 @@ ChartJS.register(
 );
 
 export default function TimelineChart() {
-
   const [timeline, setTimeline] = useState([]);
 
   useEffect(() => {
@@ -30,22 +31,22 @@ export default function TimelineChart() {
 
   const fetchTimeline = async () => {
     try {
-      const res = await API.get("/analytics/emotion-timeline");
-      setTimeline(res.data.timeline);
+      const res = await API.timeline();
+      setTimeline(res.timeline);
     } catch (error) {
       console.error(error);
     }
   };
 
   const labels = timeline.map(item => item.date);
-  const emotions = timeline.map(item => item.emotion);
+  const dataPoints = timeline.map(item => item.emotion);
 
   const data = {
     labels: labels,
     datasets: [
       {
         label: "Emotion Timeline",
-        data: emotions.map((_, i) => i + 1),
+        data: dataPoints,
         borderColor: "#4CAF50",
         tension: 0.3
       }

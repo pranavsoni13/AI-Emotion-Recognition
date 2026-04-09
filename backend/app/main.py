@@ -32,6 +32,16 @@ def health():
 def home():
     return {"message": "Welcome to the AI Emotion Recognition API!"}
 
+@app.get("/analytics/emotion-timeline")
+def get_emotion_timeline():
+    return {"timeline":[
+        {"date": "Day 1", "emotion": 1},
+        {"date": "Day 2", "emotion": 2},
+        {"date": "Day 3", "emotion": 3},
+        {"date": "Day 4", "emotion": 2},
+        {"date": "Day 5", "emotion": 4},
+    ]}
+
 Base.metadata.create_all(bind=engine)
 
 app.include_router(predict_router, tags=["Predict"])
