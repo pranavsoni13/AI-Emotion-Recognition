@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { predictEmotion } from "../services/api";
+import { API } from "../services/api";
 
 function EmotionInput({ setEmotionData }) {
 
