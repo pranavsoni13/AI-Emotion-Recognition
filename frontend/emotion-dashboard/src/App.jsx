@@ -7,7 +7,7 @@ function App() {
   const [analytics,setAnalytics]=useState(null);
 
   useEffect(()=>{
- fetch("https://emotion-backend-skns.onrender.com")
+ fetch("ai-emotion-recognition-production.up.railway.app")
   .then(res=>res.json())
   .then(data=>setAnalytics(data));
   },[]);
