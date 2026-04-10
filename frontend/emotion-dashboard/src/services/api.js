@@ -22,10 +22,7 @@ const API = {
   timeline: async (text) => {
     try {
       const response = await axios.get(
-        `${BASE_URL}/analytics/emotion-timeline`,
-        {
-          text: text
-        }
+        `${BASE_URL}/analytics/emotion-timeline`
       );
 
       return response.data;

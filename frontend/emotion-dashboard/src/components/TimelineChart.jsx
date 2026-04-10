@@ -34,11 +34,7 @@ export default function TimelineChart() {
       const res = await API.timeline();
       console.log("Timeline API:", res);
 
-      if (res && res.timeline) {
-        setTimeline(res.timeline);
-      } else {
-        setTimeline([]);
-      }
+      setTimeline(res.timeline);
 
     } catch (error) {
       console.error("Timeline error:", error);
