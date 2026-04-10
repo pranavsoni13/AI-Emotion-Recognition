@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {predictEmotion} from "../services/api";
+import API from "../services/api";
 
 function EmotionInput({ setEmotionData }) {
 
@@ -36,7 +36,7 @@ function EmotionInput({ setEmotionData }) {
 
     try {
       // ✅ FIX: API.post hata ke helper function use kar
-      const data = await predictEmotion(text);
+      const data = await API(text);
 
       console.log("API response:", data);
 
