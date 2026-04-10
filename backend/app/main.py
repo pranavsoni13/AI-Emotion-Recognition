@@ -6,6 +6,10 @@ from app.database.database import engine, Base
 from app.database import models
 import os
 
+origins=[
+    "https://ai-emotion-recognition-production.up.railway.app",
+    "http://localhost:5173"
+]
 app = FastAPI(
     title="AI Emotion Recognition API",
     description="A FastAPI backend for emotion recognition using a pre-trained model.",
@@ -14,7 +18,7 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
