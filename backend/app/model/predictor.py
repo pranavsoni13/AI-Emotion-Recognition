@@ -3,7 +3,7 @@ import requests
 API_URL = "https://api-inference.huggingface.co/models/j-hartmann/emotion-english-distilroberta-base"
 
 headers = {
-    "Authorization": "Bearer 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"
+    "Authorization": "Bearer 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"
 }
 
 def predict_emotion(text: str):
