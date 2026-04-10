@@ -35,11 +35,12 @@ function EmotionInput({ setEmotionData }) {
     console.log("Analyze clicked");
 
     try {
-      // ✅ FIX: API.post hata ke helper function use kar
-      const data = await API(text);
-
+      const data = await API.predict(text);
+      if(!data) {
+        console.error("No data received from API");
+        return;
+      }
       console.log("API response:", data);
-
       setResult(data);
       setEmotionData(data);
 
