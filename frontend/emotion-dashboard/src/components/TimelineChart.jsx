@@ -32,25 +32,31 @@ export default function TimelineChart() {
   const fetchTimeline = async () => {
     try {
       const res = await API.timeline();
-
       console.log("Timeline API:", res);
 
-      // ✅ FIX: safety + fallback
       if (res && res.timeline) {
         setTimeline(res.timeline);
       } else {
-        setTimeline([]); // fallback
+        setTimeline([]);
       }
 
     } catch (error) {
-      console.error(error);
-      setTimeline([]); // safety
+      console.error("Timeline error:", error);
+      setTimeline([]);
     }
   };
 
-  // ✅ SAFE mapping (avoid crash)
-  const labels = timeline?.map(item => item.date) || [];
-  const dataPoints = timeline?.map(item => item.emotion) || [];
+  // ✅ Emotion number → name (optional but clean UI)
+  const emotionMap = {
+    1: "Sad",
+    2: "Neutral",
+    3: "Happy",
+    4: "Angry"
+  };
+
+  const labels = timeline.map(item => item.date);
+
+  const dataPoints = timeline.map(item => item.emotion);
 
   const data = {
     labels: labels,
@@ -59,10 +65,38 @@ export default function TimelineChart() {
         label: "Emotion Timeline",
         data: dataPoints,
         borderColor: "#4CAF50",
-        tension: 0.3
+        backgroundColor: "#4CAF50",
+        tension: 0.3,
+        pointRadius: 5
       }
     ]
   };
 
-  return <Line data={data} />;
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        display: true
+      },
+      tooltip: {
+        callbacks: {
+          label: function(context) {
+            const value = context.raw;
+            return emotionMap[value] || value;
+          }
+        }
+      }
+    },
+    scales: {
+      y: {
+        ticks: {
+          callback: function(value) {
+            return emotionMap[value] || value;
+          }
+        }
+      }
+    }
+  };
+
+  return <Line data={data} options={options} />;
 }
