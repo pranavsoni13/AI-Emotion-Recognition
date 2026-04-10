@@ -8,7 +8,7 @@ const API = {
       const response = await axios.post(
         `${BASE_URL}/predict`,
         {
-          text: text   // ✅ correct body
+          text: text
         }
       );
 

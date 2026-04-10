@@ -32,22 +32,26 @@ function EmotionInput({ setEmotionData }) {
     : null;
 
   const analyze = async () => {
-    console.log("Analyze clicked");
+  console.log("Analyze clicked");
 
-    try {
-      const data = await API.predict(text);
-      if(!data) {
-        console.error("No data received from API");
-        return;
-      }
-      console.log("API response:", data);
-      setResult(data);
-      setEmotionData(data);
+  try {
+    const data = await API.predict(text);
 
-    } catch (error) {
-      console.error("API error", error);
+    if (!data || data.error) {
+      console.error("No data received from API");
+      return;
     }
-  };
+
+    console.log("API response:", data);
+
+    // 🔥 FIX HERE ONLY
+    setResult(data.emotions);
+    setEmotionData(data.emotions);
+
+  } catch (error) {
+    console.error("API error", error);
+  }
+};
 
   return (
     <div>

@@ -1,4 +1,4 @@
-import { Pie } from "react-chartjs-2";
+import { Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   ArcElement,
@@ -30,7 +30,7 @@ function EmotionChart({ data }) {
   };
   return (
     <div style={{height:"300px"}}>
-      <Pie data={chartData} />
+      <Bar data={chartData} />
     </div>
   );
 }
