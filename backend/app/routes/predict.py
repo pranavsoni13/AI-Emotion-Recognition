@@ -9,5 +9,9 @@ class TextInput(BaseModel):
 
 @router.post("/predict")
 def predict(data:TextInput):
-    result = predict_emotion(data.text)
-    return result
+    try:
+        emotions = predict_emotion(data.text)
+        return {"emotions": emotions}
+    except Exception as e:
+        print(f"Error in /predict: {e}")
+        return {"error": str(e)}
