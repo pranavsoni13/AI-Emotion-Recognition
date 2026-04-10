@@ -1,33 +1,18 @@
-import requests
 import os
+from huggingface_hub import InferenceClient
 
-API_URL = "https://api-inference.huggingface.co/models/j-hartmann/emotion-english-distilroberta-base"
-
-headers = {
-    "Authorization": f"Bearer {os.getenv('HF_TOKEN')}"
-}
+client = InferenceClient(
+    provider="hf-inference",
+    api_key=os.environ["HF_TOKEN"],
+)
 
 def predict_emotion(text: str):
-    try:
-        response = requests.post(
-            API_URL,
-            headers=headers,
-            json={"inputs": text}
-        )
+    result = client.text_classification(
+        text,
+        model="j-hartmann/emotion-english-distilroberta-base",
+    )
 
-        data = response.json()
-
-        if isinstance(data, dict) and "error" in data:
-            return {"error": data["error"]}
-
-        result = data[0]
-
-        emotions = {
-            item["label"]: round(item["score"], 3)
-            for item in result
-        }
-
-        return emotions
-
-    except Exception as e:
-        return {"error": str(e)}
+    return {
+        item.label: round(item.score, 3)
+        for item in result
+    }
