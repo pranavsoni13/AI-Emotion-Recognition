@@ -3,14 +3,18 @@ import axios from "axios";
 const BASE_URL = "https://ai-emotion-recognition-production.up.railway.app";
 
 const API = {
-  // 🔥 prediction
   predict: async (text) => {
     try {
       const response = await axios.post(`${BASE_URL}/predict`, {
-        text,
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify({text}),
       });
+      const data = await response.json();
 
-      return response.data;
+      return data;
     } catch (error) {
       console.error("API error:", error);
       return null;
