@@ -32,14 +32,25 @@ export default function TimelineChart() {
   const fetchTimeline = async () => {
     try {
       const res = await API.timeline();
-      setTimeline(res.timeline);
+
+      console.log("Timeline API:", res);
+
+      // ✅ FIX: safety + fallback
+      if (res && res.timeline) {
+        setTimeline(res.timeline);
+      } else {
+        setTimeline([]); // fallback
+      }
+
     } catch (error) {
       console.error(error);
+      setTimeline([]); // safety
     }
   };
 
-  const labels = timeline.map(item => item.date);
-  const dataPoints = timeline.map(item => item.emotion);
+  // ✅ SAFE mapping (avoid crash)
+  const labels = timeline?.map(item => item.date) || [];
+  const dataPoints = timeline?.map(item => item.emotion) || [];
 
   const data = {
     labels: labels,
